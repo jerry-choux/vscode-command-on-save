@@ -1,45 +1,52 @@
 {
-	"name": "command-on-save",
-	"displayName": "command on save",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.42.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.helloWorld"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
-		"pretest": "yarn run compile && yarn run lint",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^7.0.1",
-		"@types/node": "^13.7.0",
-		"@types/vscode": "^1.42.0",
-		"@typescript-eslint/eslint-plugin": "^2.18.0",
-		"@typescript-eslint/parser": "^2.18.0",
-		"eslint": "^6.8.0",
-		"glob": "^7.1.6",
-		"mocha": "^7.0.1",
-		"typescript": "^3.7.5",
-		"vscode-test": "^1.3.0"
-	}
+  "name": "command-on-save",
+  "displayName": "Command On Save",
+  "description": "Execute the command when the document is saved",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.42.0"
+  },
+  "publisher": "jerrychoux",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": [
+      {
+        "title": "jerrychoux command on save",
+        "properties": {
+          "jerrychoux.commandOnSave": {
+            "type": "array",
+            "default": [],
+            "description": "Define the commands to be executed"
+          }
+        }
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.0",
+    "@types/vscode": "^1.42.0",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.0.1",
+    "typescript": "^3.7.5",
+    "vscode-test": "^1.3.0"
+  }
 }
