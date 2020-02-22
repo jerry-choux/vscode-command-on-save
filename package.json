@@ -20,8 +20,20 @@
         "properties": {
           "jerrychoux.commandOnSave": {
             "type": "array",
-            "default": [],
-            "description": "Define the commands to be executed"
+            "description": "Define the commands to be executed",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ext": {
+                  "type": "string",
+                  "description": "the filename extension"
+                },
+                "cmd": {
+                  "type": "string",
+                  "description": "the command to be executed on file saved"
+                }
+              }
+            }
           }
         }
       }
