@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { exec } from "child_process";
 
 const CHANNEL_NAME = "Command On Save";
 const EXTENSION_NAME = "jerrychoux.commandOnSave";
@@ -42,6 +43,22 @@ class CommandOnSave {
     );
   }
 
+  private executeCommand(
+    commands: Array<ICommand>,
+    document: vscode.TextDocument
+  ) {
+    if (commands.length === 0) {
+      this.output.appendLine("Execute Commands Done.");
+      return;
+    }
+
+    let command = commands.shift();
+    exec(command!.cmd).on(
+      "exit",
+      this.executeCommand.bind(this, commands, document)
+    );
+  }
+
   public ExecuteCommands(document: vscode.TextDocument) {
     if (this.commands.length === 0) {
       return;
@@ -50,12 +67,17 @@ class CommandOnSave {
     let fileExt = document.fileName
       .substr(document.fileName.lastIndexOf(".") + 1)
       .toLowerCase();
-    let commands = this.commands.filter(command => fileExt === command.ext);
 
+    let commands = this.commands.filter(command => fileExt === command.ext);
     if (commands.length === 0) {
       return;
     }
 
-    this.output.appendLine("Execute Command for file " + document.fileName);
+    commands.forEach(command => {
+      command.cmd = command.cmd.replace(/\${file}/g, `${document.fileName}`);
+    });
+
+    this.output.appendLine("Execute Commands for file " + document.fileName);
+    this.executeCommand(commands, document);
   }
 }
