@@ -53,7 +53,7 @@ class CommandOnSave {
     }
 
     let command = commands.shift();
-    exec(command!.cmd).on(
+    exec(command!.cmd.replace(/\${file}/g, `${document.fileName}`)).on(
       "exit",
       this.executeCommand.bind(this, commands, document)
     );
@@ -72,10 +72,6 @@ class CommandOnSave {
     if (commands.length === 0) {
       return;
     }
-
-    commands.forEach(command => {
-      command.cmd = command.cmd.replace(/\${file}/g, `${document.fileName}`);
-    });
 
     this.output.appendLine("Execute Commands for file " + document.fileName);
     this.executeCommand(commands, document);
