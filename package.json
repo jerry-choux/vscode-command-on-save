@@ -2,11 +2,14 @@
   "name": "command-on-save",
   "displayName": "Command On Save",
   "description": "Execute the command when the document is saved",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.42.0"
   },
   "publisher": "jerrychoux",
+  "repository": {
+    "url": "https://github.com/jerry-choux/vscode-command-on-save"
+  },
   "categories": [
     "Other"
   ],
